@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="public/js/jquery.tablesorter.js"></script> 
+		<script type="text/javascript" src="bin/app.js"></script> 
+    </head>
+    <body>
+        <h1>Football Radar</h1>
+        <div>
+			<span class="label label-info">English Premier League season</span>
+			<select onchange="showTable()" id="selectpicker" >
+				<option value="">Make a choice</option>
+				<option value="2012">2012</option>
+			</select>
+			<span id="errorMessage" class="label label-danger"  style="display: none">No season selected!</span>
+			<span id="errorMessage2" class="label label-danger"  style="display: none">Server connection error!</span>
+            <button id="start" class="btn btn-primary btn-xs" type="button" onclick="startConnection()" style="display: none">Start</button>
+			<button id="stop" class="btn btn-danger btn-xs" type="button" onclick="stopConnection()" style="display: none">Stop</button>
+			<button id="clear" class="btn btn-default  btn-xs" type="button" onclick="showEmptyTable()" style="display: none">Clear Table</button>
+			<br>
+        </div>		
+    </body>
+</html>
