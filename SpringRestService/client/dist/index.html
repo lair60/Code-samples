@@ -1,0 +1,35 @@
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="angular-app.css"/>
+    <script src="angular.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="angular-app.js"></script>
+</head>
+<body ng-controller="AppCtrl" style="margin: auto 2em ;">
+    <h1>Angular app</h1>
+
+    <h2>{{greeting}}</h2>
+
+    <div>
+        <p>Enter your name for a custom 'hello'</p>
+        <input id="name" type="text" ng-model="name" placeholder="name"/>
+        <input type="submit" ng-click="submitClicked()"/>
+    </div>
+    <br>
+	<div>
+        <p>Enter an Arabic number(1..2147483647(max int)) to convert to a Roman numeral</p>
+        <p>Notation: { I = 1 , V = 5 , X = 10 , L = 50 , C = 100 , D = 500 , M = 1000, <span style='text-Decoration:overline'>&nbsp;&nbsp</span> = Multiplier by 1000, _ = Multiplier by 1 000 000 }</p>
+        <input id="arabicNum" type="text" ng-model="arabicNum" placeholder="Arabic Number"/>
+        <input type="submit" ng-click="submitClicked2()"/>
+        
+    </div>
+     <div id="resultBlock1" style="display: none">
+    	<span class="label label-info">Converted Roman Number:</span>
+    	<span id="resultNumber1"></span>
+     </div>
+     <div id="errorBlock" style="display: none">
+     	<span id="errorMessage" class="label label-warning" >Invalid Arabic number!</span>
+     </div>	
+</body>
+</html>
+
