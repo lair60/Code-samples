@@ -1,0 +1,73 @@
+#table_results{
+overflow-y:auto;
+overflow-x:auto;
+max-height:400px;
+}
+
+#tableIssues{
+overflow-y:auto;
+overflow-x:auto;
+max-height:400px;
+}
+
+
+th.name{width: 120px;}
+th.url{width: 150px;}
+th.description{width: 150px;}
+th.forks_count{width: 50px;}
+th.stargagers_count{width: 50px;}
+th.open_issues_count{width: 50px;}
+th.view{width: 50px;}
+
+th.title{width: 120px;}
+th.comments{width: 150px;}
+th.state{width: 50px;}
+th.assigned{width: 100px;}
+th.date{width: 50px;}
+
+th{
+text-align:center;
+}
+
+table,thead, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  word-wrap: break-word;
+}
+table  thead tr:nth-child(odd)	{
+  background-color:#28D9E0;
+}
+table tr:nth-child(odd)	{
+
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.chart_container {
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align: center;
+}
+
+.chart_container .chart_popup {
+	position:fixed;
+	width:100%;
+	height: 100%;
+	padding-top: 10%;
+	background-color: rgba(28,28,28,0.8);
+	z-index:99999;
+}
+
+#chart_div{
+	background-color:white;
+	width: 100%; 
+	height: 350px;
+	margin:0 auto;
+}
