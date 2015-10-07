@@ -1,3 +1,3 @@
 # Code samples
 
-Examples of project using Javascript, Java, C++
+Examples of projects using Javascript, Java, C++
