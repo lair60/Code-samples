@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/c3/c3.css">
+<!-- JS -->
+<script src="js/angular.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/services.js"> </script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/c3/c3.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="customersCtrl" class="container" style="padding:0px">
+	<h1><u>Searching Github repositories</u></h1>
+	
+	<div>
+		<div class="col-lg-6 input-group">
+		  <input type="text" class="form-control" ng-model="U_Name" placeholder="Search repository">
+		  <span class="input-group-btn">
+			<button class="btn btn-default" type="button" ng-click="search(U_Name)" >Search</button>
+			<button class="btn btn-default" type="button" ng-click="clean()">Remove All</button>
+		  </span>
+		</div>
+	</div>
+	
+	<div id="table_results" style="margin-top:10px;display:none;">
+		 <table ng-table="tableParams" class="table table-condensed" style="table-layout: fixed;">
+			<thead>
+			  <tr>
+				<th class="name">Name</th>
+				<th class="url">Url</th>
+				<th class="description">Description</th>
+				<th class="forks_count">Forks count</th>
+				<th class="stargagers_count">Stargazers count</th>
+				<th class="open_issues_count">Opened issues</th>
+				<th class="view">All Issues</th>
+			  </tr>
+			 </thead>
+			 <tbody>
+			  <tr ng-repeat="x in results">
+				<td>{{ x.full_name }}</td>
+				<td><a ng-href="{{ x.html_url }}" target="_blank">{{ x.html_url }}</a></td>
+				<td>{{ x.description }}</td>
+				<td>{{ x.forks }}</td>
+				<td>{{ x.stargazers_count }}</td>
+				<td>{{ x.open_issues_count }}</td>
+				<td><a href="" ng-click="openIssues( x.full_name )"> See </a></td>
+			  </tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="repository_pager" style="display:none">
+		<ul class="pager">
+			<li class="previous disabled"><a href="" ng-click="previous()">&larr; Previous</a></li>
+			<li class="show_chart"><a href="" ng-click="showChart()">Show Chart</a></li>
+			<li class="next"><a href="" ng-click="next()">Next &rarr;</a></li>
+		</ul>
+	</div>
+
+	<div id="blockIssues" style="display:none;">
+		<h2><u>Issues from: {{ issues_from }}</u></h2>
+		<div id="tableIssues" >
+			<table ng-table="tabIssues" class="table table-condensed" style="table-layout: fixed;">
+				<thead>
+				  <tr>
+					<th class="title">Title</th>
+					<th class="url">Url</th>
+					<th class="comments">Comments</th>
+					<th class="state">State</th>
+					<th class="assigned">Assigned</th>
+					<th class="date">Created At</th>
+					<th class="date">Updated At</th>
+					<th class="date">Closed At</th>
+				  </tr>
+				 </thead>
+				 <tbody>
+				  <tr ng-repeat="x in issuesResults">
+					<td>{{ x.title }}</td>
+					<td><a ng-href="{{ x.html_url }}" target="_blank">{{ x.html_url }}</a></td>
+					<td>{{ x.comments }}</td>
+					<td>{{ x.state }}</td>
+					<td>{{ x.assignee }}</td>
+					<td>{{ x.created_at }}</td>
+					<td>{{ x.updated_at }}</td>
+					<td>{{ x.closed_at }}</td>
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="issues_pager" style="display:none">
+		<ul class="pager">
+			<li class="previous disabled"><a href="" ng-click="previousIssues()">&larr; Previous</a></li>
+			<li class="next"><a href="" ng-click="nextIssues()">Next &rarr;</a></li>
+		</ul>
+	</div>
+	
+</div>
+
+<div class="chart_container">
+	<div class="chart_popup" id="chart_popup">
+		<div id="chart_div"></div>
+	</div>
+</div>
+
+<script src="js/app.js"> </script>
+</body>
+</head>
+</html>
