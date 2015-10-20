@@ -1,3 +1,4 @@
+package com.local;
 import static org.junit.Assert.assertEquals;
 
 import java.net.URISyntaxException;
@@ -16,7 +17,15 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 
 import enterprise.rest.jersey.Song;
 
-public class SongWebServiceTest extends JerseyTest {
+public class SongWebServiceTest2 extends JerseyTest {
+	
+	private static final String URL_RESOURCE = "http://localhost:8080/JAXRS-SongWebService/rest/";
+	private static final String create_service = "/songwebservice2/create";
+	private static final String delete_service = "/songwebservice2/delete";
+	private static final String update_service = "/songwebservice2/update";
+	private static final String search_service = "/songwebservice2/search";
+	private static final String searchAll_service = "/songwebservice2/searchAll";
+	private static final String getAlbumId_service = "/songwebservice2/album/";
 
 	@Override
 	protected AppDescriptor configure(){
@@ -26,9 +35,9 @@ public class SongWebServiceTest extends JerseyTest {
 	@Test
 	public void testCreate() throws JSONException,
 			URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
+		WebResource webResource = client().resource(URL_RESOURCE);
 		// CREATE SONG 1
-		ClientResponse responseMsg = webResource.path("/songwebservice/create")
+		ClientResponse responseMsg = webResource.path(create_service)
         .queryParam("id", "1")
         .queryParam("title", "London Calling")
         .queryParam("artist", "The Clash")
@@ -44,7 +53,7 @@ public class SongWebServiceTest extends JerseyTest {
 		assertEquals("Punk Rock", song.getGenre());
 		
 		//Remove the elements for the next tests
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "1")
         .get(ClientResponse.class);
 	}
@@ -52,10 +61,10 @@ public class SongWebServiceTest extends JerseyTest {
 	@Test
 	public void testUpdate() throws JSONException,
 			URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
+		WebResource webResource = client().resource(URL_RESOURCE);
 		
 		// CREATE SONG 1
-		ClientResponse responseMsg = webResource.path("/songwebservice/create")
+		ClientResponse responseMsg = webResource.path(create_service)
 		.queryParam("id", "1")
         .queryParam("title", "London Calling")
         .queryParam("artist", "The Clash")
@@ -63,7 +72,7 @@ public class SongWebServiceTest extends JerseyTest {
         .get(ClientResponse.class);
 
 		
-		responseMsg = webResource.path("/songwebservice/update")
+		responseMsg = webResource.path(update_service)
 		.queryParam("id", "1")
         .queryParam("title", "London Calling 2")
         .queryParam("artist", "The Clash")
@@ -79,16 +88,16 @@ public class SongWebServiceTest extends JerseyTest {
 		assertEquals("Punk Rock", song.getGenre());
 		
 		//Remove the elements for the next tests
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "1")
         .get(ClientResponse.class);
 	}
 	@Test
 	public void testList() throws JSONException,
 			URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
+		WebResource webResource = client().resource(URL_RESOURCE);
 		// CREATE SONG 1
-		ClientResponse responseMsg = webResource.path("/songwebservice/create")
+		ClientResponse responseMsg = webResource.path(create_service)
 		.queryParam("id", "1")
         .queryParam("title", "London Calling")
         .queryParam("artist", "The Clash")
@@ -96,14 +105,14 @@ public class SongWebServiceTest extends JerseyTest {
         .get(ClientResponse.class);
 		
 		// CREATE SONG 2
-		responseMsg = webResource.path("/songwebservice/create")
+		responseMsg = webResource.path(create_service)
 	    .queryParam("id", "2")
         .queryParam("title", "London Calling 2")
         .queryParam("artist", "The Clash")
         .queryParam("genre", "Punk Rock 2")
 	    .get(ClientResponse.class);
         
-		responseMsg = webResource.path("/songwebservice/list")
+		responseMsg = webResource.path(search_service)
         .queryParam("artist", "The Clash")
         .get(ClientResponse.class);
 		
@@ -139,11 +148,11 @@ public class SongWebServiceTest extends JerseyTest {
 		}
 		
 		//Remove the elements for the next tests
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "1")
         .get(ClientResponse.class);
 		
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "2")
         .get(ClientResponse.class);
 	}
@@ -151,9 +160,9 @@ public class SongWebServiceTest extends JerseyTest {
 	@Test
 	public void testSearch() throws JSONException,
 			URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
+		WebResource webResource = client().resource(URL_RESOURCE);
 		// CREATE SONG 1
-		ClientResponse responseMsg = webResource.path("/songwebservice/create")
+		ClientResponse responseMsg = webResource.path(create_service)
 		.queryParam("id", "1")
         .queryParam("title", "Digital Love")
         .queryParam("artist", "Daft Punk")
@@ -161,7 +170,7 @@ public class SongWebServiceTest extends JerseyTest {
         .get(ClientResponse.class);
 		
 		// CREATE SONG 2
-		responseMsg = webResource.path("/songwebservice/create")
+		responseMsg = webResource.path(create_service)
 	    .queryParam("id", "2")
         .queryParam("title", "She Will Be Love")
         .queryParam("artist", "Maroon 5")
@@ -169,7 +178,7 @@ public class SongWebServiceTest extends JerseyTest {
 	    .get(ClientResponse.class);
 		
 		// CREATE SONG 3
-		responseMsg = webResource.path("/songwebservice/create")
+		responseMsg = webResource.path(create_service)
 	    .queryParam("id", "3")
         .queryParam("title", "You’ve Got The Love")
         .queryParam("artist", "Florence + The Machine")
@@ -177,7 +186,7 @@ public class SongWebServiceTest extends JerseyTest {
 	    .get(ClientResponse.class);
 		
 		
-		 responseMsg = webResource.path("/songwebservice/search")
+		 responseMsg = webResource.path(search_service)
         .queryParam("title", "love")
         .get(ClientResponse.class);
 		
@@ -283,15 +292,15 @@ public class SongWebServiceTest extends JerseyTest {
 		assertEquals(g2, songlist.get(2).getGenre());
 		
 		//Remove the elements for the next tests
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "1")
         .get(ClientResponse.class);
 
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "2")
         .get(ClientResponse.class);
 		
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "3")
         .get(ClientResponse.class);
 	}
@@ -299,16 +308,16 @@ public class SongWebServiceTest extends JerseyTest {
 	@Test
 	public void testRemove() throws JSONException,
 			URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
+		WebResource webResource = client().resource(URL_RESOURCE);
 		// CREATE SONG 1
-		ClientResponse responseMsg = webResource.path("/songwebservice/create")
+		ClientResponse responseMsg = webResource.path(create_service)
 		.queryParam("id", "1")
         .queryParam("title", "London Calling")
         .queryParam("artist", "The Clash")
         .queryParam("genre", "Punk Rock")
         .get(ClientResponse.class);
 		
-		responseMsg = webResource.path("/songwebservice/delete")
+		responseMsg = webResource.path(delete_service)
         .queryParam("id", "1")
         .get(ClientResponse.class);
 		
@@ -320,7 +329,7 @@ public class SongWebServiceTest extends JerseyTest {
  
 	@Test(expected = UniformInterfaceException.class)
 	public void testSongNotFound() {
-		WebResource webResource = client().resource("http://localhost:8080/JAXRS-SongWebService/rest/");
-		webResource.path("/songwebservice/album/10").get(Song.class);
+		WebResource webResource = client().resource(URL_RESOURCE);
+		webResource.path(getAlbumId_service + "10").get(Song.class);
 	}
 }

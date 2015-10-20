@@ -12,8 +12,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/songwebservice")
-public class SongWebService {
+@Path("/songwebservice2")
+public class SongWebService2 {
 	
 	private static Hashtable<Integer,Song> songList = new Hashtable<Integer,Song> (); 
 
