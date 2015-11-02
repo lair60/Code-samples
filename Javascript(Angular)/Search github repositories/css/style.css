@@ -1,50 +1,23 @@
-#table_results{
-overflow-y:auto;
-overflow-x:auto;
-max-height:400px;
+th:nth-child(1){
+	width: 30%
+}
+th:nth-child(2){
+	width: 30%
+}
+th:nth-child(3){
+	width: 30%
 }
 
-#tableIssues{
-overflow-y:auto;
-overflow-x:auto;
-max-height:400px;
-}
-
-
-th.name{width: 120px;}
-th.url{width: 150px;}
-th.description{width: 150px;}
-th.forks_count{width: 50px;}
-th.stargagers_count{width: 50px;}
-th.open_issues_count{width: 50px;}
-th.view{width: 50px;}
-
-th.title{width: 120px;}
-th.comments{width: 150px;}
-th.state{width: 50px;}
-th.assigned{width: 100px;}
-th.date{width: 50px;}
-
-th{
+.table>thead>tr>th{
+border-bottom: 0;
 text-align:center;
 }
 
 table,thead, th , td  {
-  border: 1px solid grey;
   border-collapse: collapse;
-  padding: 5px;
   word-wrap: break-word;
 }
-table  thead tr:nth-child(odd)	{
-  background-color:#28D9E0;
-}
-table tr:nth-child(odd)	{
 
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}
 
 .chart_container {
 	display:none;

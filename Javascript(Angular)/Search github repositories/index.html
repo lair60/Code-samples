@@ -19,67 +19,72 @@
 	
 	<div>
 		<div class="col-lg-6 input-group">
-		  <input type="text" class="form-control" ng-model="U_Name" placeholder="Search repository">
+		  <input type="text" class="form-control" ng-model="U_Name" placeholder="Repository name">
 		  <span class="input-group-btn">
-			<button class="btn btn-default" type="button" ng-click="search(U_Name)" >Search</button>
+			<button id="search_button" class="btn btn-default" type="button" ng-click="search(U_Name)" >Search</button>
 			<button class="btn btn-default" type="button" ng-click="clean()">Remove All</button>
 		  </span>
 		</div>
 	</div>
 	
 	<div id="table_results" style="margin-top:10px;display:none;">
-		 <table ng-table="tableParams" class="table table-condensed" style="table-layout: fixed;">
-			<thead>
-			  <tr>
-				<th class="name">Name</th>
-				<th class="url">Url</th>
-				<th class="description">Description</th>
-				<th class="forks_count">Forks count</th>
-				<th class="stargagers_count">Stargazers count</th>
-				<th class="open_issues_count">Opened issues</th>
-				<th class="view">All Issues</th>
-			  </tr>
-			 </thead>
-			 <tbody>
-			  <tr ng-repeat="x in results">
-				<td>{{ x.full_name }}</td>
-				<td><a ng-href="{{ x.html_url }}" target="_blank">{{ x.html_url }}</a></td>
-				<td>{{ x.description }}</td>
-				<td>{{ x.forks }}</td>
-				<td>{{ x.stargazers_count }}</td>
-				<td>{{ x.open_issues_count }}</td>
-				<td><a href="" ng-click="openIssues( x.full_name )"> See </a></td>
-			  </tr>
+		<table ng-table="tableParams" class="table table-bordered table-striped" data-click-to-select="true"> 	<thead style="background-color: lightsteelblue;">
+				<tr>
+					<th class="name">Name</th>
+					<th class="url">Url</th>
+					<th class="description">Description</th>
+					<th class="forks_count">Forks count</th>
+					<th class="stargagers_count">Stargazers count</th>
+					<th class="open_issues_count">Opened issues</th>
+					<th class="view">All Issues</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in results">
+					<td>{{ x.full_name }}</td>
+					<td><a ng-href="{{ x.html_url }}" target="_blank">{{ x.html_url }}</a></td>
+					<td>{{ x.description }}</td>
+					<td>{{ x.forks }}</td>
+					<td>{{ x.stargazers_count }}</td>
+					<td>{{ x.open_issues_count }}</td>
+					<td><a href="" ng-click="openIssues( x.full_name )"> See </a></td>
+				</tr>
+				<tr ng-show="!results.length">
+				  	<td colspan="7" style="text-align:center">
+				  		No records found	
+				  	</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
 	
-	<div class="repository_pager" style="display:none">
+	<div class="repository_pager" style="display:none;">
 		<ul class="pager">
 			<li class="previous disabled"><a href="" ng-click="previous()">&larr; Previous</a></li>
-			<li class="show_chart"><a href="" ng-click="showChart()">Show Chart</a></li>
+			<li  ng-show="results.length" class="show_chart"><a href="" ng-click="showChart()">Show Chart</a></li>
 			<li class="next"><a href="" ng-click="next()">Next &rarr;</a></li>
 		</ul>
 	</div>
 
-	<div id="blockIssues" style="display:none;">
-		<h2><u>Issues from: {{ issues_from }}</u></h2>
-		<div id="tableIssues" >
-			<table ng-table="tabIssues" class="table table-condensed" style="table-layout: fixed;">
-				<thead>
-				  <tr>
-					<th class="title">Title</th>
-					<th class="url">Url</th>
-					<th class="comments">Comments</th>
-					<th class="state">State</th>
-					<th class="assigned">Assigned</th>
-					<th class="date">Created At</th>
-					<th class="date">Updated At</th>
-					<th class="date">Closed At</th>
-				  </tr>
-				 </thead>
-				 <tbody>
-				  <tr ng-repeat="x in issuesResults">
+	
+		
+	<div id="blockIssues" style="width:100%;display:none;">
+		<h2><u>Issues from: {{ issues_from }}</u></h2>	
+		<table style="word-break: break-all" ng-table="tabIssues" class="table table-bordered table-striped" data-click-to-select="true">
+			<thead style="background-color: lightsteelblue;">
+				<tr>
+					<th style="width:20%" class="title">Title</th>
+					<th style="width:20%" class="url">Url</th>
+					<th style="width:20%" class="comments">Comments</th>
+					<th style="width:5%" class="state">State</th>
+					<th style="width:20%" class="assigned">Assigned</th>
+					<th style="width:5%" class="date">Created At</th>
+					<th style="width:5%" class="date">Updated At</th>
+					<th style="width:5%" class="date">Closed At</th>
+			  	</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in issuesResults">
 					<td>{{ x.title }}</td>
 					<td><a ng-href="{{ x.html_url }}" target="_blank">{{ x.html_url }}</a></td>
 					<td>{{ x.comments }}</td>
@@ -88,10 +93,14 @@
 					<td>{{ x.created_at }}</td>
 					<td>{{ x.updated_at }}</td>
 					<td>{{ x.closed_at }}</td>
-				  </tr>
-				</tbody>
-			</table>
-		</div>
+				</tr>
+				<tr ng-show="!issuesResults.length">
+				  	<td colspan="8" style="text-align:center">
+				  		No records found	
+				  	</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	
 	<div class="issues_pager" style="display:none">

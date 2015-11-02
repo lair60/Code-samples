@@ -47,7 +47,12 @@ app.controller('customersCtrl',['$scope','apiService', function($scope, apiServi
 	
 	$scope.search= function(U_Name){
 		if((U_Name != "") && (U_Name != undefined)){
+			$('#search_button').html('Searching..');
+			$('#search_button').attr('disabled',true);
+			$scope.clean();
 			apiService.search(U_Name).success(function (response) {
+					$('#search_button').html('Search');
+					$('#search_button').attr('disabled',false);
 					last_word = U_Name;
 					$("#table_results").show();
 					$(".repository_pager").show();
