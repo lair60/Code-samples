@@ -162,7 +162,7 @@ public class SongWebService1 {
 					e.printStackTrace();
 					return Response.status(400).entity("Error database connection!!").build();
 				}
-				return Response.status(200).entity(song).build();
+				return Response.status(200).entity(song).header("Access-Control-Allow-Origin","*").build();
 			}
 			else{
 				return Response.status(400).entity("Song with id="+Integer.parseInt(id)+ "doesnt exist!!").build();

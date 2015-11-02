@@ -19,7 +19,7 @@ import enterprise.rest.jersey.Song;
 
 public class SongWebServiceTest2 extends JerseyTest {
 	
-	private static final String URL_RESOURCE = "http://localhost:8080/JAXRS-SongWebService/rest/";
+	private static final String URL_RESOURCE = "http://localhost:8080/JAXRS-WebServices/musicWebService/";
 	private static final String create_service = "/songwebservice2/create";
 	private static final String delete_service = "/songwebservice2/delete";
 	private static final String update_service = "/songwebservice2/update";

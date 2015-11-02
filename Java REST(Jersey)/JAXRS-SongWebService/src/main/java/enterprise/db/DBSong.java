@@ -21,7 +21,7 @@ public class DBSong {
    private static final String USER = ConfigDB.USER;
    private static final String PASS = ConfigDB.PASS;
    
-   private Connection conn;
+   private static Connection conn;
    private static DBSong db = null;
    
    private Statement statement;
@@ -40,9 +40,14 @@ public class DBSong {
    * @return MysqlConnect Database connection object
    */
    public static DBSong getDbCon() {
-      if ( db == null ) {
-          db = new DBSong();
-      }
+      try {
+		if ( db == null || !conn.isValid(5) ) {
+		      db = new DBSong();
+		  }
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
       return db;
   }
    /**
